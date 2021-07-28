@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ CERTIFICATE_NAME }}
+  namespace: {{ NAMESPACE }}
+  labels:
+    "use-http01-solver": "true"
+spec:
+  commonName: {{ HOSTNAME }}
+  secretName: {{ CERTIFICATE_NAME }}
+  dnsNames:
+    - {{ HOSTNAME }}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

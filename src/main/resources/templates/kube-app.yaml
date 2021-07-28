@@ -1,0 +1,59 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ NAMESPACE }}
+  namespace: {{ NAMESPACE }}
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`{{ HOSTNAME }}`)
+    kind: Rule
+    services:
+    - name: {{ SERVICE_NAME }}
+      port: {{ SERVICE_PORT }}
+  tls:
+    secretName: {{ CERTIFICATE_NAME }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ SERVICE_NAME }}
+  namespace: {{ NAMESPACE }}
+  labels:
+    app: {{ SERVICE_NAME }}
+spec:
+  selector:
+    app: {{ SERVICE_NAME }}
+  ports:
+  - protocol: TCP
+    port: {{ SERVICE_PORT }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ SERVICE_NAME }}
+  namespace: {{ NAMESPACE }}
+  labels:
+    app: {{ SERVICE_NAME }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ SERVICE_NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ SERVICE_NAME }}
+    spec:
+      containers:
+      - name: {{ SERVICE_NAME }}
+        image: {{ DOCKER_IMAGE }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ SERVICE_PORT }}
+        envFrom:
+        - secretRef:
+            name: {{ SECRETS_NAME_APP }}
+      imagePullSecrets:
+      - name: {{ SECRETS_NAME_DOCKER }}

@@ -1,0 +1,30 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.codemonstur</groupId>
+    <artifactId>kubeconf</artifactId>
+    <version>1</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A small utility for for generating kubernetes configurations.</description>
+    <url>https://github.com/codemonstur/kubeconf</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.release>16</maven.compiler.release>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.github.codemonstur</groupId>
+            <artifactId>bobthebuildtool</artifactId>
+            <version>5</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

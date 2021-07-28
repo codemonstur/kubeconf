@@ -1,0 +1,8 @@
+include https://raw.githubusercontent.com/codemonstur/bobfiles/master/foss-app-github
+
+version: 1
+packaging: bob-plugin
+enablePreview: false
+dependencies:
+  - project: ../bobthebuildtool
+    scope: provided
