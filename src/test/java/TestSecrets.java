@@ -3,19 +3,19 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
-import static kubeconf.BobPlugin.*;
+import static kubeconf.core.Functions.*;
 
-public class TestSecrets {
+public enum TestSecrets {;
 
     public static void main(final String... args) throws IOException {
         final Map<String, Object> vars = ofEntries(
             entry("SECRETS_NAME", "the-name-of-it"),
-            entry("NAMESPACE", "siptrunk"),
+            entry("NAMESPACE", "some-namespace"),
             entry("SECRETS", ofEntries(
                     entry("TEST", "data")))
         );
 
-        final String output = generateAppConfiguration(TEMPLATE_KUBE_SECRETS, vars);
+        final String output = generateAppConfiguration(newTemplate("kube-secrets"), vars);
         System.out.println(output);
     }
 
