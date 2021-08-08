@@ -1,6 +1,6 @@
 include https://raw.githubusercontent.com/codemonstur/bobfiles/master/foss-app-github
 
-version: 1
+version: 2
 packaging: bob-plugin
 enablePreview: false
 dependencies:
